@@ -2,9 +2,8 @@
 import React, { Component } from 'react';
 import { Image, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
-import { Container, Content, Item, Input, Button, Icon, View, Text, Spinner, Alert } from 'native-base';
+import { Container, Content, Item, Input, Button, Icon, View, Text, Spinner } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-
 import { setUser } from '../../actions/user';
 import styles from './styles';
 

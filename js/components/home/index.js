@@ -9,7 +9,7 @@ import { Grid, Row } from 'react-native-easy-grid';
 import { setIndex } from '../../actions/list';
 import { openDrawer } from '../../actions/drawer';
 import styles from './styles';
-import AppHeader from '../appHeader';
+import AppHomeHeader from '../appHeader/homeHeader.js';
 
 class Home extends Component {
 
@@ -25,24 +25,22 @@ class Home extends Component {
     Actions.blankPage();
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+        title: 'Home',
+        right: 'home'
+    }
+
+  }
+
   render() {
     return (
       <Container style={styles.container}>
-       <AppHeader />
+       <AppHomeHeader title={this.state.title} />
 
         <Content>
-          <Grid style={styles.mt}>
-            {this.props.list.map((item, i) =>
-              <Row key={i}>
-                <TouchableOpacity
-                  style={styles.row}
-                  onPress={() => this.newPage(i)}
-                >
-                  <Text style={styles.text}>{item}</Text>
-                </TouchableOpacity>
-              </Row>
-            )}
-          </Grid>
+
         </Content>
       </Container>
     );

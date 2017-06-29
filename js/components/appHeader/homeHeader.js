@@ -22,9 +22,10 @@ class AppHeader extends Component {
             
                 <Header>
                     <Left>
-                        <Button transparent onPress={() => Actions.pop()}>
-                          <Icon name="ios-arrow-back" />
-                        </Button>
+                        <Button transparent onPress={this.props.openDrawer}>
+                          <Icon active name="notifications" />
+                        </Button>  
+                        
                     </Left>
                     <Body style={styles.body}>
                         <Title>{this.props.title}</Title>
@@ -32,7 +33,7 @@ class AppHeader extends Component {
                     <Right>
                         <Button transparent onPress={this.props.openDrawer}>
                           <Icon active name="menu" />
-                        </Button>                                            
+                        </Button>                                         
                     </Right>
                 </Header>
             

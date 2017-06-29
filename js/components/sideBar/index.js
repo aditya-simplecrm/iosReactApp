@@ -1,8 +1,10 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Content, Text, ListItem } from 'native-base';
+import { Content, Text, ListItem, Left, Icon, Body } from 'native-base';
+import { Alert, AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+
 
 import { closeDrawer } from '../../actions/drawer';
 import { setIndex } from '../../actions/list';
@@ -21,14 +23,24 @@ class SideBar extends Component {
     this.props.navigateTo(route, 'home');
   }
 
+  _userLogout = () => {
+      AsyncStorage.removeItem('username');
+      Actions.login();
+  }
   render() {
     return (
       <Content style={styles.sidebar} >
         <ListItem button onPress={() => { Actions.home(); this.props.closeDrawer(); }} >
           <Text>Home</Text>
         </ListItem>
-        <ListItem button onPress={() => { Actions.blankPage(); this.props.closeDrawer(); }} >
-          <Text>Blank Page</Text>
+        <ListItem button onPress={() => { Actions.leads(); this.props.closeDrawer(); }} >
+          <Text>Leads</Text>
+        </ListItem>
+        <ListItem button onPress={() => {this._userLogout(); this.props.closeDrawer(); }} icon>
+          
+          <Body>
+            <Text>Sign Out</Text>
+          </Body>
         </ListItem>
       </Content>
     );
