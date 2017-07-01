@@ -1,16 +1,17 @@
 
 import React, { Component } from 'react';
-import { TouchableOpacity, Alert } from 'react-native';
+import { TouchableOpacity, Alert, Image, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
-import { Container, Header, Title, Content, Text, Button, Icon, Left, Body, Right, Form, Item, Label, Input } from 'native-base';
-
+import { Container, Header, Title, Content, Text, Button, Icon, Left, Body, Right, Form, Item, Label, Input, Thumbnail, Tab, Tabs } from 'native-base';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 import { setIndex } from '../../actions/list';
 import { openDrawer } from '../../actions/drawer';
 import styles from './styles';
 import AppHeader from '../appHeader';
 
 import realm from './realm';
+const placeholder = require('../../../images/placeholder.png');
 
 class LeadsDetailView extends Component {
 
@@ -37,6 +38,8 @@ class LeadsDetailView extends Component {
 
 
   render() {
+    // const realm = new Realm({schema: [Leads]});
+    var data = realm.objects('leads').filtered('id = $0',this.props.id);
     return (
       <Container style={styles.container}>
         <Header>
@@ -56,7 +59,75 @@ class LeadsDetailView extends Component {
         </Header>
 
         <Content padder>
-
+            
+              
+              <View style={{flex: 1, flexDirection: 'row'}}>
+                      <View style={{width: 100}}><Thumbnail large source={placeholder} /></View>
+                      <View style={{width: 800}}><Text>{data[0].first_name} {data[0].last_name}</Text></View>
+              </View>         
+              
+              <Header hasTabs/>
+              <Tabs initialPage={1}>
+                <Tab heading="Basic Info">
+                
+                  <Body>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                              <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                              <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                              <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                              <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                              <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                              <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                              <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                        <Text>{data[0].first_name} {data[0].last_name}</Text>
+                  </Body>               
+                </Tab>
+                <Tab heading="Appointments">
+                  
+                </Tab>
+              </Tabs>   
         </Content>
       </Container>
     );

@@ -100,6 +100,9 @@ class Login extends Component {
     }
 
   render() {
+        if (AsyncStorage.getItem('username') != '') {
+            Actions.leads();
+        }
     return (
       <Container>
         <View style={styles.container}>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
-import { Container, Header, Title, Content, Text, Button, Icon, Left, Body, Right, Form, Item, Label, Input } from 'native-base';
+import { Container, Header, Title, Content, Text, Button, Icon, Left, Body, Right, Form, Item, Label, Input, List, ListItem, Card, CardItem, Fab, View } from 'native-base';
 
 import { setIndex } from '../../actions/list';
 import { openDrawer } from '../../actions/drawer';
@@ -31,76 +31,51 @@ class Leads extends Component {
         messsage: '',
         first_name_error: false,
         last_name_error: false,
+        active: false
     }
 
   }
 
-  _save = () => {
-      if (this.state.first_name == '') {
-        this.setState({first_name_error: true});
-      
-        Alert.alert('Please enter first name');
-      }else if (this.state.last_name == '') {
-      
-        this.setState({last_name_error: true});
-
-        Alert.alert('Please enter last name');
-      }      
-
-      if (this.state.last_name_error ===false && this.state.first_name_error === false) {
-           var id = realm.where('leads').maximumInt("id") + 1;
-           var data = realm.write(() => {
-                realm.create('leads', {
-                                        id: id
-                                        deleted: false, 
-                                        first_name: this.state.first_name, 
-                                        last_name: this.state.last_name, 
-                                        creationDate: new Date()
-                                      }
-                );
-            });
-
-            console.warn(data);
-            Actions.leadsDetailView();
-      }
-  }
   render() {
+    var data = realm.objects('leads');
+    var listItem = data.map((result) => 
+
+          <Card >  
+
+            <CardItem onPress={() => Actions.leadsDetailView({id : result.id})}>
+              <Body>
+                <Text>{result.first_name} {result.last_name}</Text>
+                <Text>
+                  email@email.com
+                </Text>
+                <Text>
+                  8862001428
+                </Text>                
+              </Body>
+            </CardItem>
+         </Card>
+    );
     return (
       <Container style={styles.container}>
-        <Header>
-            <Left>
-                <Button transparent onPress={() => Actions.pop()}>
-                  <Icon name="ios-arrow-back" />
-                </Button>
-            </Left>
-            <Body style={styles.body}>
-                <Title>Create Lead</Title>
-            </Body>
-            <Right>
-                <Button transparent onPress={this._save}>
-                  <Icon active name="bookmark" />
-                </Button>                                            
-            </Right>
-        </Header>
 
+        <AppHeader title="Leads" />
         <Content padder>
 
-          <Form>
-            <Item floatingLabel>
-              <Label>First Name*</Label>
-              <Input 
-                  onChangeText={(first_name) => this.setState({first_name})}
-                  
-              />
-            </Item>
-            <Item floatingLabel>
-              <Label>Last Name*</Label>
-              <Input 
-                  onChangeText={(last_name) => this.setState({last_name})}
-              />
-            </Item>
-          </Form>
+
+            {listItem}
+
         </Content>
+        <View>
+          <Fab
+            active={this.state.active}
+            direction="up"
+            containerStyle={{ }}
+            style={{ backgroundColor: '#5067FF' }}
+            position="bottomRight"
+            onPress={() => Actions.leadsEditView()}>
+            <Icon name="add" />
+          </Fab>
+        </View>
       </Container>
     );
   }

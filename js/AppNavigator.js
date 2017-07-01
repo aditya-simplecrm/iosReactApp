@@ -11,6 +11,7 @@ import Login from './components/login/';
 import Home from './components/home/';
 import BlankPage from './components/blankPage';
 import LeadsDetailView from './components/leads/detailView.js';
+import LeadsEditView from './components/leads/editView.js';
 import Leads from './components/leads';
 import SideBar from './components/sideBar';
 import { statusBarColor } from './themes/base-theme';
@@ -59,6 +60,8 @@ class AppNavigator extends Component {
         return <Leads />;
       case 'leadsDetailView':
         return <LeadsDetailView />;
+      case 'leadsEditView':
+        return <LeadsEditView />;
       default :
         return <Login />;
     }
@@ -104,6 +107,7 @@ class AppNavigator extends Component {
             <Scene key="blankPage" component={BlankPage} />
             <Scene key="leads" component={Leads} />
             <Scene key="leadsDetailView" component={LeadsDetailView} />
+            <Scene key="leadsEditView" component={LeadsEditView} />
           </Scene>
         </RouterWithRedux>
       </Drawer>
